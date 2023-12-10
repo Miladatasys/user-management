@@ -1,23 +1,36 @@
 package com.javaev.usermanagement.model;
 
+import org.hibernate.annotations.GenericGenerator;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID; // Importar la clase UUID
-
-import org.hibernate.annotations.GenericGenerator;
+import java.util.UUID;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(generator = "uuid2") // Utilizar el generador 'uuid2' que es estándar en Hibernate
-    @GenericGenerator(name = "uuid2", strategy = "uuid2") // Definir el generador para usar la estrategia UUID
-    private UUID id; // Cambiar el tipo de 'Long' a 'UUID'
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    private UUID id;
 
+    @NotBlank(message = "Username cannot be empty")
     private String name;
+
+    @NotBlank(message = "Email cannot be empty")
+    @Email(message = "invalid email format")
     private String email;
+
+    @NotBlank(message = "Password cannot be empty")
+    @Size(min = 8, message = "The password must have at least 8 characters")
+    @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).{8,}$", message = "Password does not meet requirements")
     private String password;
+
+    // Otros campos sin duplicar
     private Date created;
     private Date modified;
     private Date lastLogin;

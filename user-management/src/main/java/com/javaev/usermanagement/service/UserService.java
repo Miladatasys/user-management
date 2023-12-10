@@ -2,34 +2,38 @@ package com.javaev.usermanagement.service;
 
 import com.javaev.usermanagement.model.User; 
 import com.javaev.usermanagement.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.javaev.usermanagement.security.JwtUtil;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.UUID;
-
 @Service
 public class UserService {
-    private final UserRepository userRepository; // type and variable
-    private final PasswordEncoder passwordEncoder; // Final means that the value of the variable cannot change
 
-    @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) { // the constructor expect to receive an object of type UserRepo when UserService is instanciated
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
     }
 
-    public User registerUser(User user) { // method bring back an object type User, registerUser is the method, User user is the parameter that recieves.
-        // Verify if the email is already register
+    // Método para registrar usuarios
+    public User registerUser(User user) {
+        // Verificar si el correo electrónico ya está registrado
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            throw new RuntimeException("Email already exist");
+            throw new RuntimeException("Email already exists");
         }
 
-        String encodedPassword = passwordEncoder.encode(user.getPassword()); //local variable inside the method
+        // Encriptar la contraseña y guardar el usuario
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
 
-        // Save User
+        // Suponiendo que tienes un método en User para establecer el token JWT
+        user.setToken(jwtUtil.generateToken(user.getName()));
+
         return userRepository.save(user);
     }
 }
