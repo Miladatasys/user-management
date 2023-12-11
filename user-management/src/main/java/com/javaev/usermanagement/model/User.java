@@ -6,12 +6,14 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Table(name = "user") 
 public class User {
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -30,10 +32,9 @@ public class User {
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).{8,}$", message = "Password does not meet requirements")
     private String password;
 
-    @Column(length = 500) // Ajusta la longitud según tus necesidades
+    @Column(length = 500) 
     private String token;
 
-    // Otros campos sin duplicar
     private Date created;
     private Date modified;
     private Date lastLogin;
@@ -43,7 +44,6 @@ public class User {
     private Set<Phone> phones = new HashSet<>();
 
 
-    // Getter and setters are methods that acces and modify private variables values.
     public UUID getId() {
         return id;
     }
@@ -56,8 +56,8 @@ public class User {
         return name;
     }
 
-    public void setName(String name) { // Parameter
-        this.name = name; // 'this.name' refers to the variable instance, 'name' is the parameter
+    public void setName(String name) { 
+        this.name = name;
     }
 
     public String getEmail() {

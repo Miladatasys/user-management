@@ -1,11 +1,15 @@
 package com.javaev.usermanagement.model;
 import jakarta.persistence.*;
+import java.util.UUID;
+
+import org.hibernate.annotations.GenericGenerator; 
 
 @Entity
 public class Phone {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    private UUID id;
 
     private String number;
     private String cityCode;
@@ -35,7 +39,7 @@ public class Phone {
         this.countryCode = countryCode;
     }
     @ManyToOne
-    @JoinColumn(name = "user_id") // foreign key tabla 'phones'
+    @JoinColumn(name = "user_id") 
     private User user;
 
 }
