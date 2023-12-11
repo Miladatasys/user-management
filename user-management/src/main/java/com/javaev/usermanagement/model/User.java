@@ -30,11 +30,13 @@ public class User {
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*\\d).{8,}$", message = "Password does not meet requirements")
     private String password;
 
+    @Column(length = 500) // Ajusta la longitud según tus necesidades
+    private String token;
+
     // Otros campos sin duplicar
     private Date created;
     private Date modified;
     private Date lastLogin;
-    private String token;
     private Boolean isActive;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)

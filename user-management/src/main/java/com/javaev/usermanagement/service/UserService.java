@@ -4,15 +4,18 @@ import com.javaev.usermanagement.model.User;
 import com.javaev.usermanagement.repository.UserRepository;
 import com.javaev.usermanagement.security.JwtUtil;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
+    @Autowired
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    @Autowired
+    private JwtTokenService jwtTokenService; // Tu servicio para generar tokens
 
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
@@ -26,6 +29,12 @@ public class UserService {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new RuntimeException("Email already exists");
         }
+
+        // Genera un token para el nuevo usuario
+        String token = jwtTokenService.generateToken(user);
+
+        // Asigna el token al usuario
+        user.setToken(token);
 
         // Encriptar la contraseña y guardar el usuario
         String encodedPassword = passwordEncoder.encode(user.getPassword());
