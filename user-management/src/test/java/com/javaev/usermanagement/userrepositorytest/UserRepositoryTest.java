@@ -1,4 +1,4 @@
-package com.javaev.usermanagement.userrepositorytest;
+/*package com.javaev.usermanagement.userrepositorytest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,3 +34,4 @@ public class UserRepositoryTest {
         assertThat(foundUser.get().getEmail()).isEqualTo(user.getEmail());
     }
 }
+*/

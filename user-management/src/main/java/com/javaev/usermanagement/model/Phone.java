@@ -34,5 +34,8 @@ public class Phone {
     public void setCountrycode(String countryCode) {
         this.countryCode = countryCode;
     }
+    @ManyToOne
+    @JoinColumn(name = "user_id") // foreign key tabla 'phones'
+    private User user;
 
 }

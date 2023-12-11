@@ -1,4 +1,4 @@
-package com.javaev.usermanagement.security;
+/*package com.javaev.usermanagement.security;
 
 
 import io.jsonwebtoken.*;
@@ -33,3 +33,4 @@ public class JwtConfig {
         return expiration;
     }
 }
+*/

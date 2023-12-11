@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.javaev.usermanagement.model.User;
 import com.javaev.usermanagement.service.UserService;
 
+import jakarta.validation.Valid;
 
 import java.util.Collections;
 
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody User user) {
         try {
             User newUser = userService.registerUser(user);
             newUser.setPassword(null);

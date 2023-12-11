@@ -1,4 +1,4 @@
-package com.javaev.usermanagement.security; 
+/*package com.javaev.usermanagement.security; 
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -56,3 +56,4 @@ public class JwtUtil {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();
     }
 }
+*/

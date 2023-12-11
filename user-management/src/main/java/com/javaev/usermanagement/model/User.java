@@ -39,7 +39,7 @@ public class User {
     private Date lastLogin;
     private Boolean isActive;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
     private Set<Phone> phones = new HashSet<>();
 
 

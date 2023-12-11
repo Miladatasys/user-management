@@ -1,4 +1,4 @@
-package com.javaev.usermanagement.service;
+/*package com.javaev.usermanagement.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -37,3 +37,4 @@ public class JwtTokenService {
         return jwtConfig.jwtParser().parseClaimsJws(token).getBody();
     }
 }
+*/

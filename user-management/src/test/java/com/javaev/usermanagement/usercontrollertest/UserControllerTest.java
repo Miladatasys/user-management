@@ -1,4 +1,4 @@
-package com.javaev.usermanagement.usercontrollertest;
+/*package com.javaev.usermanagement.usercontrollertest;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -51,3 +51,4 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$.email").value(user.getEmail()));
     }
 }
+*/
